@@ -6,6 +6,16 @@ public class SelfOrganizingList
 	public static String midwest[] = {"MIDWEST", "Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", 
 		"Cincinnati", "Purdue", "Indiana", "Texas", "Buffalo", "Valparaiso", "Northeastern", "New Mexico State", "Hampton"};
 
+	public static String west[] = { "Wisconsin", "Arizona", "Baylor", "North Carolina", "Arkansas", "Xavier", "VCU", "Oregon", "Oklahoma State",
+		"Ohio State", "Mississippi", "Wofford", "Harvard", "Georgia State", "Texas Southern", "Costal Carolina"};
+	
+	public static String east[] = {"Villanova", "Virginia", "Oklahoma", "Louisville", "Northern Iowa", "Providence", "Michigan State", "NC State",
+		"LSU", "Georgia", "Dayton", "Wyoming", "UC Irvine", "Albany", "Belmont", "Lafayette"};
+
+	public static String south[] = {"Duke", "Gonzaga", "Iowa State", "Georgetown", "Utah", "Southern Methodist", "Iowa", "San Diego State", 
+		"St Johns State", "Davidson", "UCLA", "Stephen F Austin", "Eastern Washington", "UAB", "North Dakota State", "Robert Morris"};
+	
+	
 	public static void main(String[] args){
 		boolean modeMTF = false, modeTranspose = false, modeCount = false;
 		boolean generateNCAAData = false;
@@ -57,33 +67,35 @@ public class SelfOrganizingList
 			tournament = new NCAA();
 			int participants[] = null;
 			int roundQueries[] = null;
-			String filename = "midwestResults.txt";
-			for(int round = 1; round < 5; round++){
-				if(round == 1){
-					participants = new int[midwest.length];
-					for(int l = 0; l < midwest.length; l++){
-						participants[l] = l;
+			String filename = "results.txt";
+			for(int division = 1; division < 2; division++){
+				for(int round = 1; round < 5; round++){
+					if(round == 1){
+						participants = new int[midwest.length];
+						for(int l = 0; l < midwest.length; l++){
+							participants[l] = l;
+						}
 					}
-				}
-				else{
-					//reorder the participants such that participants /= 2
-					participants = new int[(winners.length / 2) + 1];
-					for(int k = 1; k < participants.length; k++){
-						participants[k] = winners[k];
-						//System.out.println(midwest[winners[k]]);
+					else{
+						//reorder the participants such that participants /= 2
+						participants = new int[(winners.length / 2) + 1];
+						for(int k = 1; k < participants.length; k++){
+							participants[k] = winners[k];
+							//System.out.println(midwest[winners[k]]);
+						}
 					}
-				}
-				//find the winners for the given round
-				winners = tournament.generateWinners(participants, round);
-				
-				//figure out the queries for each team that round
-				GenerateQuery queries = new GenerateQuery(winners, round);
-				roundQueries = queries.getQueries();
-				
-				//print the names of teams and number of queries per team to a file
-				IO io = new IO(winners, roundQueries, round);
-				io.writeRoundResultsToFile(filename);
-			}	
+					//find the winners for the given round
+					winners = tournament.generateWinners(participants, round, division);
+
+					//figure out the queries for each team that round
+					GenerateQuery queries = new GenerateQuery(winners, round);
+					roundQueries = queries.getQueries();
+
+					//print the names of teams and number of queries per team to a file
+					IO io = new IO(winners, roundQueries, round);
+					io.writeRoundResultsToFile(filename);
+				}	
+			}
 			
 			//TESTING INFO//
 			/*for(int z = 1; z < 17; z++){
