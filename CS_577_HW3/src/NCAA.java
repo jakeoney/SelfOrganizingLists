@@ -191,7 +191,7 @@ public class NCAA {
 		//Generate Random number between 0 and totalProbabilty
 		Random rand = new Random();
 
-	    // I think this is going to give me numbers between 1 and 100
+	    //numbers between 1 and 100
 	    int randomNum = rand.nextInt((int)totalProbability) + 1;
 	    
 		if(randomNum <= highSeedChanceToWin){

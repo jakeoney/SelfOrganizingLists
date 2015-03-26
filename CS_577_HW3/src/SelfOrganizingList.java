@@ -101,8 +101,9 @@ public class SelfOrganizingList
 		GenerateQuery queries = null;
 		IO io = null;
 		
-		for(int division = 1; division < 5; division++){
-			for(int round = 1; round < 5; round++){
+		for(int round = 1; round < 5; round++){
+			for(int division = 1; division < 5; division++){
+			
 				if(round == 1){
 					participants = new int[midwest.length];
 					for(int l = 0; l < midwest.length; l++){
@@ -111,10 +112,9 @@ public class SelfOrganizingList
 				}
 				else{
 					//reorder the participants such that participants /= 2
-					participants = new int[(winners.length / 2) + 1];
+					participants = new int[(midwest.length / (2*(round-1)) ) + 1];
 					for(int k = 1; k < participants.length; k++){
 						participants[k] = winners[k];
-						//System.out.println(midwest[winners[k]]);
 					}
 				}
 				//find the winners for the given round
