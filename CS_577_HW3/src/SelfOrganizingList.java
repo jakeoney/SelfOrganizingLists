@@ -1,3 +1,11 @@
+/*0 MW 8 || 3 W 11
+1 E 9 || 2 S 10
+
+1, 2, 4, 5
+
+17, 18, 19, 21
+71, 81, 91, 12
+*/
 
 public class SelfOrganizingList 
 {
