@@ -64,32 +64,32 @@ public class GenerateQuery {
 		};
 	double roundW[] = 
 		{
-			97.9, 97.4, 91.6, 89.9, 81.9, 64.1, 42.7, 60.4, 39.6, 57.4, 35.9, 18.1, 10.1, 8.4, 2.6, 2.1,
-			91.8, 84.9, 69, 70.6, 22.6, 18.9, 5.8, 4.6, 2.6, 8.2, 8.9, 2.5, 4.2, 3.3, 1.2, 1.1,
-			71.1, 70.4, 16.4, 20.5, 3.8, 3.5, 2.9, 2, 1, 4.4, 1.2, 0.4, 0.7, 0.5, 0.8, 0.7,
-			41.8, 36.2, 5.1, 9.9, 1.3, 0.9, 0.8, 0.8, 0.3, 1.3, 0.4, 0.2, 0.3, 0.2, 0.2, 0.5,
-			13.9, 10.8, 1, 2.7, 0.3, 0.2, 0.2, 0.3, 0.1, 0.5, 0.1, 0.1, 0.1, 0.1, 0.1, 0.3,
-			9.9, 7.2, 0.4, 1.7, 0.2, 0.1, 0.1, 0.1, 0.1, 0.3, 0.1, 0.05, 0.1, 0.05, 0.05, 0.2
+			-1, 97.9, 97.4, 91.6, 89.9, 81.9, 64.1, 42.7, 60.4, 39.6, 57.4, 35.9, 18.1, 10.1, 8.4, 2.6, 2.1,
+			-1, 91.8, 84.9, 69, 70.6, 22.6, 18.9, 5.8, 4.6, 2.6, 8.2, 8.9, 2.5, 4.2, 3.3, 1.2, 1.1,
+			-1, 71.1, 70.4, 16.4, 20.5, 3.8, 3.5, 2.9, 2, 1, 4.4, 1.2, 0.4, 0.7, 0.5, 0.8, 0.7,
+			-1, 41.8, 36.2, 5.1, 9.9, 1.3, 0.9, 0.8, 0.8, 0.3, 1.3, 0.4, 0.2, 0.3, 0.2, 0.2, 0.5,
+			-1, 13.9, 10.8, 1, 2.7, 0.3, 0.2, 0.2, 0.3, 0.1, 0.5, 0.1, 0.1, 0.1, 0.1, 0.1, 0.3,
+			-1, 9.9, 7.2, 0.4, 1.7, 0.2, 0.1, 0.1, 0.1, 0.1, 0.3, 0.1, 0.05, 0.1, 0.05, 0.05, 0.2
 		};
 	
 	double roundE[] = 
 		{
-			97.6, 96, 91.7, 92.3, 77.7, 71.9, 80.8, 57.7, 42.3, 19.2, 28.1, 22.3, 7.7, 8.3, 4, 2.4,
-			83.4, 68.2, 70.6, 62.5, 31.6, 19.3, 27.1, 9.5, 6, 3.2, 6.9, 3.6, 2.3, 3.3, 1.5, 1.1,
-			55.8, 55.3, 18.7, 26.1, 10.2, 3.1, 19.1, 3.8, 2.3, 1.4, 0.9, 0.7, 0.5, 0.6, 0.9, 0.7,
-			30.4, 32.6, 7.1, 12.3, 3.7, 0.8,  9.1, 1.1, 0.8, 0.5, 0.3, 0.2, 0.2, 0.2, 0.2, 0.5,
-			14.2, 15, 2, 4.7, 0.9, 0.8, 3.1, 0.4, 0.3, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.3,
-			3.5, 3.4, 0.4, 1.1, 0.2, 0.1, 0.9, 0.2, 0.1, 0.1, 0.1, 0.05, 0.05, 0.1, 0.05, 0.1
+			-1, 97.6, 96, 91.7, 92.3, 77.7, 71.9, 80.8, 57.7, 42.3, 19.2, 28.1, 22.3, 7.7, 8.3, 4, 2.4,
+			-1, 83.4, 68.2, 70.6, 62.5, 31.6, 19.3, 27.1, 9.5, 6, 3.2, 6.9, 3.6, 2.3, 3.3, 1.5, 1.1,
+			-1, 55.8, 55.3, 18.7, 26.1, 10.2, 3.1, 19.1, 3.8, 2.3, 1.4, 0.9, 0.7, 0.5, 0.6, 0.9, 0.7,
+			-1, 30.4, 32.6, 7.1, 12.3, 3.7, 0.8,  9.1, 1.1, 0.8, 0.5, 0.3, 0.2, 0.2, 0.2, 0.2, 0.5,
+			-1, 14.2, 15, 2, 4.7, 0.9, 0.8, 3.1, 0.4, 0.3, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.3,
+			-1, 3.5, 3.4, 0.4, 1.1, 0.2, 0.1, 0.9, 0.2, 0.1, 0.1, 0.1, 0.05, 0.05, 0.1, 0.05, 0.1
 		};
 
 	double roundS[] = 
 		{
-			98.3, 96.1, 94.9, 81.4, 70.6, 68.5, 53.3, 56.8, 43.2, 46.7, 31.5, 29.4, 18.6, 5.1, 3.9, 1.8,
-			93, 82.8, 74.1, 45.2, 37.3, 16.4, 8.6, 3.2, 2.9, 7, 7.7, 12.9, 4.7, 1.7, 1.6, 0.9,
-			82.3, 48.3, 38.7, 7.1, 5.5, 5.4, 2.3, 1.5, 1.2, 1.7, 2.4, 1.1, 0.6, 0.4, 0.9, 0.6,
-			52.3, 21.9, 16.3, 2.6, 1.6, 1.4, 0.6, 0.4, 0.4, 0.4, 0.6, 0.3, 0.2, 0.2, 0.2, 0.5,
-			34.4, 12.4, 8, 1, 0.5, 0.5, 0.2, 0.2, 0.1, 0.2, 0.3, 0.1, 0.1, 0.1, 0.1, 0.2,
-			9.3, 2.9, 1.6, 0.3, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.1, 0.1
+			-1, 98.3, 96.1, 94.9, 81.4, 70.6, 68.5, 53.3, 56.8, 43.2, 46.7, 31.5, 29.4, 18.6, 5.1, 3.9, 1.8,
+			-1, 93, 82.8, 74.1, 45.2, 37.3, 16.4, 8.6, 3.2, 2.9, 7, 7.7, 12.9, 4.7, 1.7, 1.6, 0.9,
+			-1, 82.3, 48.3, 38.7, 7.1, 5.5, 5.4, 2.3, 1.5, 1.2, 1.7, 2.4, 1.1, 0.6, 0.4, 0.9, 0.6,
+			-1, 52.3, 21.9, 16.3, 2.6, 1.6, 1.4, 0.6, 0.4, 0.4, 0.4, 0.6, 0.3, 0.2, 0.2, 0.2, 0.5,
+			-1, 34.4, 12.4, 8, 1, 0.5, 0.5, 0.2, 0.2, 0.1, 0.2, 0.3, 0.1, 0.1, 0.1, 0.1, 0.2,
+			-1, 9.3, 2.9, 1.6, 0.3, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.1, 0.1
 		};
 	
 	int winnerQueries[] = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
@@ -117,13 +117,36 @@ public class GenerateQuery {
 	private int[] tallyQueries(){
 		int totalQueries[] = new int[roundResults.length];
 		boolean winning;
-		
+		int range;
 		int j = roundResults.length -1;
 		for(int i = 1; i< roundResults.length; i++){
+			switch(division){
+				case 1 :{
+					double totalProbability = roundMW[roundResults[i]+ (17*(currentRound-1))] + roundMW[roundResults[j]+ (17*(currentRound-1))];
+					//finds the interest level (given by percentages above) for the given winner/loser
+					range = this.whichRangeForQueries((int)((roundMW[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					break;
+				}
+				case 2 :{
+					double totalProbability = roundW[roundResults[i]+ (17*(currentRound-1))] + roundW[roundResults[j]+ (17*(currentRound-1))];
+					//finds the interest level (given by percentages above) for the given winner/loser
+					range = this.whichRangeForQueries((int)((roundW[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					break;
+				}
+				case 3 :{
+					double totalProbability = roundE[roundResults[i]+ (17*(currentRound-1))] + roundE[roundResults[j]+ (17*(currentRound-1))];
+					//finds the interest level (given by percentages above) for the given winner/loser
+					range = this.whichRangeForQueries((int)((roundE[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					break;
+				}
+				default :{ // case 4
+					double totalProbability = roundS[roundResults[i]+ (17*(currentRound-1))] + roundS[roundResults[j]+ (17*(currentRound-1))];
+					//finds the interest level (given by percentages above) for the given winner/loser
+					range = this.whichRangeForQueries((int)((roundS[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					break;
+				}
+			}
 			
-			double totalProbability = roundMW[roundResults[i]+ (17*(currentRound-1))] + roundMW[roundResults[j]+ (17*(currentRound-1))];
-			//finds the interest level (given by percentages above) for the given winner/loser
-			int range = this.whichRangeForQueries((int)((roundMW[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
 			j--;
 			
 			if(i <= (roundResults.length/2)){ //then we are working with winning query numbers

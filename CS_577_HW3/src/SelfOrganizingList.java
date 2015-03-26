@@ -6,15 +6,15 @@ public class SelfOrganizingList
 	public static String midwest[] = {"MIDWEST", "Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", 
 		"Cincinnati", "Purdue", "Indiana", "Texas", "Buffalo", "Valparaiso", "Northeastern", "New Mexico State", "Hampton"};
 
-	public static String west[] = { "Wisconsin", "Arizona", "Baylor", "North Carolina", "Arkansas", "Xavier", "VCU", "Oregon", "Oklahoma State",
-		"Ohio State", "Mississippi", "Wofford", "Harvard", "Georgia State", "Texas Southern", "Costal Carolina"};
-	
-	public static String east[] = {"Villanova", "Virginia", "Oklahoma", "Louisville", "Northern Iowa", "Providence", "Michigan State", "NC State",
-		"LSU", "Georgia", "Dayton", "Wyoming", "UC Irvine", "Albany", "Belmont", "Lafayette"};
-
-	public static String south[] = {"Duke", "Gonzaga", "Iowa State", "Georgetown", "Utah", "Southern Methodist", "Iowa", "San Diego State", 
-		"St Johns State", "Davidson", "UCLA", "Stephen F Austin", "Eastern Washington", "UAB", "North Dakota State", "Robert Morris"};
-	
+	public static String west[] = { "WEST", "Wisconsin", "Arizona", "Baylor", "North Carolina", "Arkansas", "Xavier", "VCU", "Oregon", "Oklahoma State",
+			"Ohio State", "Mississippi", "Wofford", "Harvard", "Georgia State", "Texas Southern", "Costal Carolina"};
+		
+	public static String east[] = {"EAST", "Villanova", "Virginia", "Oklahoma", "Louisville", "Northern Iowa", "Providence", "Michigan State", "NC State",
+			"LSU", "Georgia", "Dayton", "Wyoming", "UC Irvine", "Albany", "Belmont", "Lafayette"};
+		
+	public static String south[] = {"SOUTH", "Duke", "Gonzaga", "Iowa State", "Georgetown", "Utah", "Southern Methodist", "Iowa", "San Diego State", 
+			"St Johns State", "Davidson", "UCLA", "Stephen F Austin", "Eastern Washington", "UAB", "North Dakota State", "Robert Morris"};
+		
 	
 	public static void main(String[] args){
 		boolean modeMTF = false, modeTranspose = false, modeCount = false;
@@ -68,7 +68,7 @@ public class SelfOrganizingList
 			int participants[] = null;
 			int roundQueries[] = null;
 			String filename = "results.txt";
-			for(int division = 1; division < 2; division++){
+			for(int division = 1; division < 5; division++){
 				for(int round = 1; round < 5; round++){
 					if(round == 1){
 						participants = new int[midwest.length];
@@ -92,7 +92,7 @@ public class SelfOrganizingList
 					roundQueries = queries.getQueries();
 
 					//print the names of teams and number of queries per team to a file
-					IO io = new IO(winners, roundQueries, round);
+					IO io = new IO(winners, roundQueries, round, division);
 					io.writeRoundResultsToFile(filename);
 				}	
 			}
