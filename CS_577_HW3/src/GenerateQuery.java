@@ -97,12 +97,14 @@ public class GenerateQuery {
 	
 	// Round Results stores the index for each team
 	private int[] roundResults;
-	int currentRound;
-	int queries[];
+	private int currentRound;
+	private int queries[];
+	private int division;
 	
-	public GenerateQuery(int[] results, int round){
-		roundResults = results;
-		currentRound = round;
+	public GenerateQuery(int[] results, int round, int division){
+		this.roundResults = results;
+		this.currentRound = round;
+		this.division = division;
 		queries = this.tallyQueries();
 	}
 	
@@ -119,9 +121,9 @@ public class GenerateQuery {
 		int j = roundResults.length -1;
 		for(int i = 1; i< roundResults.length; i++){
 			
-			double totalProbability = roundMW[roundResults[i]] + roundMW[roundResults[j]];
+			double totalProbability = roundMW[roundResults[i]+ (17*(currentRound-1))] + roundMW[roundResults[j]+ (17*(currentRound-1))];
 			//finds the interest level (given by percentages above) for the given winner/loser
-			int range = this.whichRangeForQueries((int)((roundMW[roundResults[i]]/totalProbability) * 100));
+			int range = this.whichRangeForQueries((int)((roundMW[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
 			j--;
 			
 			if(i <= (roundResults.length/2)){ //then we are working with winning query numbers

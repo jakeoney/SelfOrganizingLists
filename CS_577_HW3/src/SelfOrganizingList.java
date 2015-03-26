@@ -88,7 +88,7 @@ public class SelfOrganizingList
 					winners = tournament.generateWinners(participants, round, division);
 
 					//figure out the queries for each team that round
-					GenerateQuery queries = new GenerateQuery(winners, round);
+					GenerateQuery queries = new GenerateQuery(winners, round, division);
 					roundQueries = queries.getQueries();
 
 					//print the names of teams and number of queries per team to a file
