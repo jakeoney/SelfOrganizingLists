@@ -21,7 +21,6 @@ public class SelfOrganizingList
 		boolean generateNCAAData = false;
 		int scenario = 0;
 		int i = 0;
-		NCAA tournament = null;
 
 		//parse cmd line args
 		while(i < args.length){
@@ -61,53 +60,9 @@ public class SelfOrganizingList
 		
 		//pass each query into private self organizing list
 		//rounds 1-6 correspond to Midwest
-		int winners[] = null; //index into the original participants array
 
 		if(generateNCAAData){
-			tournament = new NCAA();
-			int participants[] = null;
-			int roundQueries[] = null;
-			String filename = "results.txt";
-			for(int division = 1; division < 5; division++){
-				for(int round = 1; round < 5; round++){
-					if(round == 1){
-						participants = new int[midwest.length];
-						for(int l = 0; l < midwest.length; l++){
-							participants[l] = l;
-						}
-					}
-					else{
-						//reorder the participants such that participants /= 2
-						participants = new int[(winners.length / 2) + 1];
-						for(int k = 1; k < participants.length; k++){
-							participants[k] = winners[k];
-							//System.out.println(midwest[winners[k]]);
-						}
-					}
-					//find the winners for the given round
-					winners = tournament.generateWinners(participants, round, division);
-
-					//figure out the queries for each team that round
-					GenerateQuery queries = new GenerateQuery(winners, round, division);
-					roundQueries = queries.getQueries();
-
-					//print the names of teams and number of queries per team to a file
-					IO io = new IO(winners, roundQueries, round, division);
-					io.writeRoundResultsToFile(filename);
-				}	
-			}
-			
-			//TESTING INFO//
-			/*for(int z = 1; z < 17; z++){
-				if(z == 1){
-					System.out.println("--winners--");
-				}
-				else if(z == 9){
-					System.out.println("--losers--");
-				}
-				System.out.println(midwest[winners[z]]);
-				System.out.println(roundQueries[z]);
-			}*/
+			generateNCAATournamentInfo();
 		}
 		
 		else if(scenario == NCAA_TOURNAMENT){
@@ -124,7 +79,79 @@ public class SelfOrganizingList
 		}
 
 	}
+	
+	public static void generateNCAATournamentInfo(){
+		NCAA tournament = new NCAA();
+		int participants[] = null;
+		int roundQueries[] = null;
+		int winners[] = null; //index into the original participants array
+		String filename = "results.txt";
+		int finalFourLeft[] = new int[3]; // index starts at 1;
+		int finalFourLeftCount = 1;
+		int finalFourRight[] = new int[3]; // index starts at 1;
+		int finalFourRightCount = 1;
+		GenerateQuery queries = null;
+		IO io = null;
+		
+		for(int division = 1; division < 5; division++){
+			for(int round = 1; round < 5; round++){
+				if(round == 1){
+					participants = new int[midwest.length];
+					for(int l = 0; l < midwest.length; l++){
+						participants[l] = l;
+					}
+				}
+				else{
+					//reorder the participants such that participants /= 2
+					participants = new int[(winners.length / 2) + 1];
+					for(int k = 1; k < participants.length; k++){
+						participants[k] = winners[k];
+						//System.out.println(midwest[winners[k]]);
+					}
+				}
+				//find the winners for the given round
+				winners = tournament.generateWinners(participants, round, division);
+				if(round == 4){
+					if(finalFourLeftCount == 3){
+						finalFourRight[finalFourRightCount] = winners[1];
+						finalFourRightCount++;
+					}
+					else{
+						finalFourLeft[finalFourLeftCount] = winners[1];
+						finalFourLeftCount++;
+					}
+					
+				}
+				//figure out the queries for each team that round
+				queries = new GenerateQuery(winners, round, division);
+				roundQueries = queries.getQueries();
 
+				//print the names of teams and number of queries per team to a file
+				io = new IO(winners, roundQueries, round, division);
+				io.writeRoundResultsToFile(filename);
+			}	
+		}
+		//in here we need to do the same thing but with the final 4
+		int championship[] = new int[3];
+		
+		//handle the left side (ie the Midwest and West)
+		winners = tournament.generateWinners(finalFourLeft, 5, 5);
+		queries = new GenerateQuery(winners, 5, 5);
+		roundQueries = queries.getQueries();
+		io = new IO(winners, roundQueries, 5, 5);
+		io.writeRoundResultsToFile(filename);
+		championship[1] = winners[1]; 
+		
+		//handle the right side (ie the East and South)
+		winners = tournament.generateWinners(finalFourLeft, 5, 6);
+		queries = new GenerateQuery(winners, 5, 6);
+		roundQueries = queries.getQueries();
+		io = new IO(winners, roundQueries, 5, 6);
+		io.writeRoundResultsToFile(filename);
+		championship[2] = winners[2];
+		
+		//in here we need to do the same thing but with the final 2
+	}
 }
 
 

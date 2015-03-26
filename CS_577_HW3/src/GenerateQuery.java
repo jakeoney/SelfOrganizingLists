@@ -117,7 +117,7 @@ public class GenerateQuery {
 	private int[] tallyQueries(){
 		int totalQueries[] = new int[roundResults.length];
 		boolean winning;
-		int range;
+		int range = 0;
 		int j = roundResults.length -1;
 		for(int i = 1; i< roundResults.length; i++){
 			switch(division){
@@ -139,10 +139,33 @@ public class GenerateQuery {
 					range = this.whichRangeForQueries((int)((roundE[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
 					break;
 				}
-				default :{ // case 4
+				case 4 :{ 
 					double totalProbability = roundS[roundResults[i]+ (17*(currentRound-1))] + roundS[roundResults[j]+ (17*(currentRound-1))];
 					//finds the interest level (given by percentages above) for the given winner/loser
 					range = this.whichRangeForQueries((int)((roundS[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					break;
+				}
+				default :{ 
+					if(roundResults[0] == 0){
+						double totalProbability = roundMW[roundResults[i]+ (17*(currentRound-1))] + roundW[roundResults[j]+ (17*(currentRound-1))];
+						//finds the interest level (given by percentages above) for the given winner/loser
+						range = this.whichRangeForQueries((int)((roundMW[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					}
+					else if(roundResults[0] == 1){
+						double totalProbability = roundW[roundResults[i]+ (17*(currentRound-1))] + roundMW[roundResults[j]+ (17*(currentRound-1))];
+						//finds the interest level (given by percentages above) for the given winner/loser
+						range = this.whichRangeForQueries((int)((roundW[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					}
+					else if(roundResults[0] == 2){
+						double totalProbability = roundE[roundResults[i]+ (17*(currentRound-1))] + roundS[roundResults[j]+ (17*(currentRound-1))];
+						//finds the interest level (given by percentages above) for the given winner/loser
+						range = this.whichRangeForQueries((int)((roundE[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					}
+					else if(roundResults[0] == 3){
+						double totalProbability = roundS[roundResults[i]+ (17*(currentRound-1))] + roundE[roundResults[j]+ (17*(currentRound-1))];
+						//finds the interest level (given by percentages above) for the given winner/loser
+						range = this.whichRangeForQueries((int)((roundS[roundResults[i]+ (17*(currentRound-1))]/totalProbability) * 100));
+					}
 					break;
 				}
 			}

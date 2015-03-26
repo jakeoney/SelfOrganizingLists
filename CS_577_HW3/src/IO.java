@@ -31,6 +31,7 @@ public class IO
 
 	public boolean writeRoundResultsToFile(String filename){
 		boolean writeSuccessful = false;
+		boolean firstItr = true;
 		try{
 		BufferedWriter outputWriter = null;
 		if(round == 1 && division == 1){
@@ -52,10 +53,13 @@ public class IO
 				outputWriter.write(east[0] + " Round " + round);
 				break;
 			}
-			default: {
+			case 4: {
 				outputWriter.write(south[0] + " Round " + round);
 				break;
 			}
+			default: 
+				outputWriter.write("FINAL FOUR: Round " + round);
+				break;
 		}
 		outputWriter.newLine();
 		for (int i = 1; i < participants.length; i++) {
@@ -74,10 +78,40 @@ public class IO
 				outputWriter.write(east[participants[i]] + ", ");
 				break;
 			}
-			default: {
+			case 4: {
 				outputWriter.write(south[participants[i]] + ", ");
 				break;
 			}
+			default:
+				if(participants[0] == 0 && firstItr){ 
+					outputWriter.write(midwest[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 0 && !firstItr){
+					outputWriter.write(west[participants[i]] + ", ");
+				}
+				else if(participants[0] == 1 && firstItr){
+					outputWriter.write(west[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 1 && !firstItr){ 
+					outputWriter.write(midwest[participants[i]] + ", ");
+				}
+				else if(participants[0] == 2 && firstItr){
+					outputWriter.write(east[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 2 && !firstItr){ 
+					outputWriter.write(south[participants[i]] + ", ");
+				}
+				else if(participants[0] == 3 && firstItr){
+					outputWriter.write(south[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 3 && !firstItr){ 
+					outputWriter.write(east[participants[i]] + ", ");
+				}
+				break;
 		}			
 			outputWriter.write(Integer.toString(queries[i]));
 			outputWriter.newLine();

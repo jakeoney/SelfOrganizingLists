@@ -81,10 +81,22 @@ public class NCAA {
 
 			winner = playGame(highSeed, lowSeed, roundNumber, division);
 			if(winner == highSeed){
+				if(division > 4 && division == 5){// the case for final four and up
+					winnersLosers[0] = 0; 
+				}
+				else if(division > 4 && division == 6){
+					winnersLosers[0] = 2;
+				}
 				winnersLosers[i] = highSeed;
 				winnersLosers[loserIndex] = lowSeed;
 			}
 			else if(winner == lowSeed){
+				if(division > 4 && division == 5){
+					winnersLosers[0] = 1;
+				}
+				else if(division > 4 && division == 6){
+					winnersLosers[0] = 3;
+				}
 				winnersLosers[i] = lowSeed;
 				winnersLosers[loserIndex] = highSeed;
 			}
@@ -124,8 +136,17 @@ public class NCAA {
 				highSeedArrayValues = roundS[highSeed + (17*(round-1))]; 
 				lowSeedArrayValues = roundS[lowSeed + (17*(round-1))];
 				break;
+			case 5: //final 4 left
+				highSeedArrayValues = roundMW[highSeed + (17*(round-1))]; 
+				lowSeedArrayValues = roundW[lowSeed + (17*(round-1))];
+				break;
+			case 6: //final 4 right
+				highSeedArrayValues = roundE[highSeed + (17*(round-1))]; 
+				lowSeedArrayValues = roundS[lowSeed + (17*(round-1))];
+				break;
 			default :
 				System.out.println("Something went wrong in generate winner");
+				System.exit(4);
 				break;
 		}
 		
