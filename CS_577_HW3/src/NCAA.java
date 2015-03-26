@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class NCAA {
@@ -21,22 +22,22 @@ public class NCAA {
 		Duke, Gonzaga, IowaState, Georgetown, Utah, SouthernMethodist, Iowa, SanDiegoState, StJohnsState,
 		Davidson, UCLA, StephenFAustin, EasternWashington, UAB, NorthDakotaState, RobertMorris
 	}
-
-	String midwest[] = {"Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", "Cincinnati", 
-		"Purdue", "Indiana", "Texas", "Buffalo", "Valparaiso", "Northeastern", "New Mexico State", "Hampton"};
 	
-	double round1MW[] = 
-		{98.5, 96.3, 95.5, 86.1, 68.4, 55.1, 68.2, 47.3, 52.8, 31.8, 44.9, 31.6, 13.9, 4.5, 3.7, 1.5};
-	double round2MW[] = 
-		{96.3, 65.7, 77.4, 61.1, 27.3, 12.7, 26.9, 1.3, 1.6, 6, 8.3, 6.5, 5.2, 1.5, 1.4, 0.8};
-	double round3MW[] =
-		{90.9, 30, 51.1, 4.4, 1.8, 4.3, 8.9, 0.6, 0.7, 1.8, 2.8, 0.5, 0.4, 0.4, 0.8, 0.6};
-	double round4MW[] = 
-		{77.7, 5.4, 9.5, 2.1, 0.7, 0.6, 1.3, 0.2, 0.3, 0.4, 0.6, 0.2, 0.2, 0.1, 0.2, 0.5};
-	double round5MW[] =
-		{58.7, 2.9, 4.5, 0.9, 0.3, 0.3, 0.5, 0.1, 0.1, 0.2, 0.3, 0.1, 0.1, 0.1, 0.1, 0.2};
-	double round6MW[] = 
-		{48, 1.8, 2.6, 0.6, 0.2, 0.1, 0.3, 0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.05, 0.05, 0.1};
+	double roundMW[] = 
+		{
+			//round 1
+			-1, 98.5, 96.3, 95.5, 86.1, 68.4, 55.1, 68.2, 47.3, 52.8, 31.8, 44.9, 31.6, 13.9, 4.5, 3.7, 1.5,
+			//round2
+			-1, 96.3, 65.7, 77.4, 61.1, 27.3, 12.7, 26.9, 1.3, 1.6, 6, 8.3, 6.5, 5.2, 1.5, 1.4, 0.8, 
+			//round3
+			-1, 90.9, 30, 51.1, 4.4, 1.8, 4.3, 8.9, 0.6, 0.7, 1.8, 2.8, 0.5, 0.4, 0.4, 0.8, 0.6,
+			//round4
+			-1, 77.7, 5.4, 9.5, 2.1, 0.7, 0.6, 1.3, 0.2, 0.3, 0.4, 0.6, 0.2, 0.2, 0.1, 0.2, 0.5,
+			//round5
+			-1, 58.7, 2.9, 4.5, 0.9, 0.3, 0.3, 0.5, 0.1, 0.1, 0.2, 0.3, 0.1, 0.1, 0.1, 0.1, 0.2,
+			//round6
+			-1, 48, 1.8, 2.6, 0.6, 0.2, 0.1, 0.3, 0.1, 0.1, 0.1, 0.2, 0.1, 0.1, 0.05, 0.05, 0.1
+		};
 
 	double round1W[] = 
 		{97.9, 97.4, 91.6, 89.9, 81.9, 64.1, 42.7, 60.4, 39.6, 57.4, 35.9, 18.1, 10.1, 8.4, 2.6, 2.1};
@@ -82,14 +83,7 @@ public class NCAA {
 	}
 	
 	public void moveToFront(){
-		//round1
-		generateWinners();
-		
-		//round2 
-		generateWinners();
-		
-		//round3 
-		generateWinners();
+
 	}
 
 	public void count(){
@@ -101,9 +95,97 @@ public class NCAA {
 	}
 	
 
-	public ArrayList<String> generateWinners() {
-		// TODO Auto-generated method stub
+	public int[] generateWinners(String[] roundParticipants, int roundNumber) {
 		
-		return null;
+		//Store winners in first half of the array and losers in the second half of it
+		int winnersLosers[] = new int[roundParticipants.length];
+		winnersLosers[0] = -1;
+		int highSeed = 1;
+		int lowSeed = roundParticipants.length-1;
+		int winner;
+		int loserIndex = roundParticipants.length-1;
+		
+		//this will start loserIndex correct for future rounds
+		loserIndex -= 2*(roundNumber - 1);		
+		
+		//TODO will need to do some sort of copy losers each time somewhere..
+		
+		for(int i = 1; i < (roundParticipants.length/2 +1); i++){
+			
+			winner = playGame(highSeed, lowSeed, roundParticipants, roundNumber);
+			if(winner == highSeed){
+				winnersLosers[i] = highSeed;
+				winnersLosers[loserIndex] = lowSeed;
+			}
+			else if(winner == lowSeed){
+				winnersLosers[i] = lowSeed;
+				winnersLosers[loserIndex] = highSeed;
+			}
+			else{
+				System.out.println("Something went wrong. We should have a winner...");
+			}
+			loserIndex--;
+			highSeed++;
+			lowSeed--;
+		}
+		return winnersLosers;
+	}
+	
+	// Return winner
+	private int playGame(int highSeed, int lowSeed, String[] roundParticipants, int round){
+		
+		int winner = -1;
+		int highSeedChanceToWin = 0;
+		double highSeedArrayValues = 0;
+		double lowSeedArrayValues = 0;
+		double totalProbability = 0;
+		
+		// Switch based on what Region we are trying to determine the winners for
+		switch (round/7 ){
+			case 0 : {
+				highSeedArrayValues = roundMW[highSeed * round]; 
+				lowSeedArrayValues = roundMW[lowSeed * round];
+				break;
+			}
+			/*case 1 :
+				highSeedArrayValues = roundW[highSeed * round]; 
+				lowSeedArrayValues = roundW[lowSeed * round];
+				break;
+			case 2: 
+				highSeedArrayValues = roundE[highSeed * round]; 
+				lowSeedArrayValues = roundE[lowSeed * round];
+				break;
+			case 3: 
+				highSeedArrayValues = roundS[highSeed * round]; 
+				lowSeedArrayValues = roundS[lowSeed * round];
+				break;
+				*/
+			default :
+				System.out.println("Something went wrong in generate winner");
+				break;
+		}
+		
+		// Calculate the odds that each team will win
+		totalProbability = lowSeedArrayValues + highSeedArrayValues;
+		System.out.println("lowseed array + high seed array  = " + lowSeedArrayValues+ " + " +highSeedArrayValues);
+		highSeedChanceToWin = (int) (highSeedArrayValues*100 / totalProbability) ;
+		System.out.println("high seed chance to win " + highSeedChanceToWin);
+		System.out.println("total probability= " + totalProbability);
+		//Generate Random number between 0 and totalProbabilty
+		Random rand = new Random();
+
+	    // I think this is going to give me numbers between 1 and 100
+	    int randomNum = rand.nextInt((int)totalProbability) + 1;
+	    System.out.println("random = " + randomNum);
+		if(randomNum <= highSeedChanceToWin){
+			winner = highSeed;
+		}
+		else{
+			winner = lowSeed;
+		}
+		System.out.println("winner = "+ winner);
+		System.out.println("***************");
+		return winner;
 	}
 }
+

@@ -4,12 +4,14 @@ public class SelfOrganizingList
 {
 	public static final int NCAA_TOURNAMENT = 1;
 	
+	public static String midwest[] = {"", "Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", 
+		"Cincinnati", "Purdue", "Indiana", "Texas", "Buffalo", "Valparaiso", "Northeastern", "New Mexico State", "Hampton"};
 	
 	public static void main(String[] args){
 		boolean modeMTF = false, modeTranspose = false, modeCount = false;
 		int scenario = 0;
 		int i = 0;
-		NCAA tournament;
+		NCAA tournament = null;
 		
 		//parse cmd line args
 		if(args.length == 4){
@@ -38,11 +40,35 @@ public class SelfOrganizingList
 		}
 		
 		//pass each query into private self organizing list
+		//rounds 1-6 correspond to Midwest
+		int winnners[] = null; //index into the original participants array
+
 		if(scenario == NCAA_TOURNAMENT){
-			if(modeMTF){
-				
+			String participants[] = null;
+			for(int round = 1; round < 2; round++){
+				if(round == 1){
+					participants = midwest;
+				}
+
+				if(modeMTF){
+					winnners = tournament.generateWinners(participants, round);
+				}
+				else if(modeCount){
+					
+				}
+				else if(modeTranspose){
+					
+				}
+			}	
+			for(int z = 1; z < 17; z++){
+				if(z == 1){
+					System.out.println("--winners--");
+				}
+				else if(z == 9){
+					System.out.println("--losers--");
+				}
+				System.out.println(midwest[winnners[z]]);
 			}
-				
 		}
 		//count number of times each team gets generated
 
