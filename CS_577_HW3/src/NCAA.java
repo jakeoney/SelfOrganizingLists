@@ -79,23 +79,43 @@ public class NCAA {
 			int highSeed = roundParticipants[i];
 			int lowSeed = roundParticipants[j];
 
-			winner = playGame(highSeed, lowSeed, roundNumber, division);
+			winner = playGame(highSeed, lowSeed, roundNumber, division, roundParticipants[0]);
 			if(winner == highSeed){
-				if(division > 4 && division == 5){// the case for final four and up
+				if(roundNumber > 4 && division == 5){// the case for final four and up
 					winnersLosers[0] = 0; 
 				}
-				else if(division > 4 && division == 6){
-					winnersLosers[0] = 2;
+				else if(roundNumber > 4 && division == 6){
+					winnersLosers[0] = 1;
+				}
+				else if(roundNumber > 4 && division == 7){
+					if(roundParticipants[0] == 1)
+						winnersLosers[0] = 17;
+					else if(roundParticipants[0] == 2)
+						winnersLosers[0] = 18;
+					else if(roundParticipants[0] == 4)
+						winnersLosers[0] = 19;
+					else if(roundParticipants[0] == 5)
+						winnersLosers[0] = 21;
 				}
 				winnersLosers[i] = highSeed;
 				winnersLosers[loserIndex] = lowSeed;
 			}
 			else if(winner == lowSeed){
-				if(division > 4 && division == 5){
-					winnersLosers[0] = 1;
-				}
-				else if(division > 4 && division == 6){
+				if(roundNumber > 4 && division == 5){
 					winnersLosers[0] = 3;
+				}
+				else if(roundNumber > 4 && division == 6){
+					winnersLosers[0] = 2;
+				}
+				else if(roundNumber > 4 && division == 7){
+					if(roundParticipants[0] == 1)
+						winnersLosers[0] = 71;
+					else if(roundParticipants[0] == 2)
+						winnersLosers[0] = 81;
+					else if(roundParticipants[0] == 4)
+						winnersLosers[0] = 91;
+					else if(roundParticipants[0] == 5)
+						winnersLosers[0] = 12;
 				}
 				winnersLosers[i] = lowSeed;
 				winnersLosers[loserIndex] = highSeed;
@@ -110,7 +130,7 @@ public class NCAA {
 	}
 	
 	// Return winner
-	private int playGame(int highSeed, int lowSeed, int round, int division){
+	private int playGame(int highSeed, int lowSeed, int round, int division, int champions){
 		
 		int winner = -1;
 		int highSeedChanceToWin = 0;
@@ -144,9 +164,23 @@ public class NCAA {
 				highSeedArrayValues = roundE[highSeed + (17*(round-1))]; 
 				lowSeedArrayValues = roundS[lowSeed + (17*(round-1))];
 				break;
-			default :
-				System.out.println("Something went wrong in generate winner");
-				System.exit(4);
+			default : //championship game
+				if(champions == 1){ //MW vs E
+					highSeedArrayValues = roundMW[highSeed + (17*(round-1))]; 
+					lowSeedArrayValues = roundE[lowSeed + (17*(round-1))];
+				}
+				else if(champions == 2){ //MW vs S
+					highSeedArrayValues = roundMW[highSeed + (17*(round-1))]; 
+					lowSeedArrayValues = roundS[lowSeed + (17*(round-1))];
+				}
+				else if(champions == 4){ //W vs E
+					highSeedArrayValues = roundW[highSeed + (17*(round-1))]; 
+					lowSeedArrayValues = roundE[lowSeed + (17*(round-1))];
+				}
+				else if(champions == 5){ //W vs S
+					highSeedArrayValues = roundW[highSeed + (17*(round-1))]; 
+					lowSeedArrayValues = roundS[lowSeed + (17*(round-1))];
+				}
 				break;
 		}
 		

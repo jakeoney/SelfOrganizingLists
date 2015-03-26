@@ -90,27 +90,84 @@ public class IO
 				else if(participants[0] == 0 && !firstItr){
 					outputWriter.write(west[participants[i]] + ", ");
 				}
-				else if(participants[0] == 1 && firstItr){
+				else if(participants[0] == 3 && firstItr){
 					outputWriter.write(west[participants[i]] + ", ");
 					firstItr = false;
 				}
-				else if(participants[0] == 1 && !firstItr){ 
+				else if(participants[0] == 3 && !firstItr){ 
 					outputWriter.write(midwest[participants[i]] + ", ");
 				}
-				else if(participants[0] == 2 && firstItr){
+				else if(participants[0] == 1 && firstItr){
 					outputWriter.write(east[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 1 && !firstItr){ 
+					outputWriter.write(south[participants[i]] + ", ");
+				}
+				else if(participants[0] == 2 && firstItr){
+					outputWriter.write(south[participants[i]] + ", ");
 					firstItr = false;
 				}
 				else if(participants[0] == 2 && !firstItr){ 
+					outputWriter.write(east[participants[i]] + ", ");
+				}
+				else if(participants[0] == 17 && firstItr){
+					outputWriter.write(midwest[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 17 && !firstItr){ 
+					outputWriter.write(east[participants[i]] + ", ");
+				}
+				else if(participants[0] == 18 && firstItr){
+					outputWriter.write(midwest[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 18 && !firstItr){ 
 					outputWriter.write(south[participants[i]] + ", ");
 				}
-				else if(participants[0] == 3 && firstItr){
+				else if(participants[0] == 19 && firstItr){
+					outputWriter.write(west[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 19 && !firstItr){ 
+					outputWriter.write(east[participants[i]] + ", ");
+				}
+				else if(participants[0] == 21 && firstItr){
+					outputWriter.write(west[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 21 && !firstItr){ 
+					outputWriter.write(south[participants[i]] + ", ");
+				}
+				else if(participants[0] == 71 && firstItr){
+					outputWriter.write(east[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 71 && !firstItr){ 
+					outputWriter.write(midwest[participants[i]] + ", ");
+				}
+				else if(participants[0] == 81 && firstItr){
 					outputWriter.write(south[participants[i]] + ", ");
 					firstItr = false;
 				}
-				else if(participants[0] == 3 && !firstItr){ 
-					outputWriter.write(east[participants[i]] + ", ");
+				else if(participants[0] == 81 && !firstItr){ 
+					outputWriter.write(midwest[participants[i]] + ", ");
 				}
+				else if(participants[0] == 91 && firstItr){
+					outputWriter.write(east[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 91 && !firstItr){ 
+					outputWriter.write(west[participants[i]] + ", ");
+				}
+				else if(participants[0] == 12 && firstItr){
+					outputWriter.write(south[participants[i]] + ", ");
+					firstItr = false;
+				}
+				else if(participants[0] == 12 && !firstItr){ 
+					outputWriter.write(west[participants[i]] + ", ");
+				}
+				
 				break;
 		}			
 			outputWriter.write(Integer.toString(queries[i]));

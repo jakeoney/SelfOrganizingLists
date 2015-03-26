@@ -140,17 +140,25 @@ public class SelfOrganizingList
 		roundQueries = queries.getQueries();
 		io = new IO(winners, roundQueries, 5, 5);
 		io.writeRoundResultsToFile(filename);
+		championship[0] = winners[0];
 		championship[1] = winners[1]; 
 		
 		//handle the right side (ie the East and South)
-		winners = tournament.generateWinners(finalFourLeft, 5, 6);
+		winners = tournament.generateWinners(finalFourRight, 5, 6);
 		queries = new GenerateQuery(winners, 5, 6);
 		roundQueries = queries.getQueries();
 		io = new IO(winners, roundQueries, 5, 6);
 		io.writeRoundResultsToFile(filename);
+		championship[0] += winners[0];
+
 		championship[2] = winners[2];
 		
 		//in here we need to do the same thing but with the final 2
+		winners = tournament.generateWinners(championship, 6, 7);
+		queries = new GenerateQuery(winners, 6, 7);
+		roundQueries = queries.getQueries();
+		io = new IO(winners, roundQueries, 6, 7);
+		io.writeRoundResultsToFile(filename);
 	}
 }
 
