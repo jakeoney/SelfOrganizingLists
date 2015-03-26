@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 
 public class SelfOrganizingList 
 {
@@ -41,17 +40,25 @@ public class SelfOrganizingList
 		
 		//pass each query into private self organizing list
 		//rounds 1-6 correspond to Midwest
-		int winnners[] = null; //index into the original participants array
+		int winners[] = null; //index into the original participants array
 
 		if(scenario == NCAA_TOURNAMENT){
 			String participants[] = null;
+			int roundQueries[] = null;
 			for(int round = 1; round < 2; round++){
 				if(round == 1){
 					participants = midwest;
 				}
 
 				if(modeMTF){
-					winnners = tournament.generateWinners(participants, round);
+					//find the winners for the given round
+					winners = tournament.generateWinners(participants, round);
+					//figure out the queries for each team that round
+					GenerateQuery queries = new GenerateQuery(winners, round);
+					roundQueries = queries.getQueries();
+					//print the names of teams and number of queries per team to a file
+					
+					//reorder the participants such that participants /= 2
 				}
 				else if(modeCount){
 					
@@ -67,7 +74,8 @@ public class SelfOrganizingList
 				else if(z == 9){
 					System.out.println("--losers--");
 				}
-				System.out.println(midwest[winnners[z]]);
+				System.out.println(midwest[winners[z]]);
+				System.out.println(roundQueries[z]);
 			}
 		}
 		//count number of times each team gets generated

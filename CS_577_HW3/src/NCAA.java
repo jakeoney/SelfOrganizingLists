@@ -107,9 +107,7 @@ public class NCAA {
 		
 		//this will start loserIndex correct for future rounds
 		loserIndex -= 2*(roundNumber - 1);		
-		
-		//TODO will need to do some sort of copy losers each time somewhere..
-		
+				
 		for(int i = 1; i < (roundParticipants.length/2 +1); i++){
 			
 			winner = playGame(highSeed, lowSeed, roundParticipants, roundNumber);
@@ -167,24 +165,21 @@ public class NCAA {
 		
 		// Calculate the odds that each team will win
 		totalProbability = lowSeedArrayValues + highSeedArrayValues;
-		System.out.println("lowseed array + high seed array  = " + lowSeedArrayValues+ " + " +highSeedArrayValues);
 		highSeedChanceToWin = (int) (highSeedArrayValues*100 / totalProbability) ;
-		System.out.println("high seed chance to win " + highSeedChanceToWin);
-		System.out.println("total probability= " + totalProbability);
+
 		//Generate Random number between 0 and totalProbabilty
 		Random rand = new Random();
 
 	    // I think this is going to give me numbers between 1 and 100
 	    int randomNum = rand.nextInt((int)totalProbability) + 1;
-	    System.out.println("random = " + randomNum);
+	    
 		if(randomNum <= highSeedChanceToWin){
 			winner = highSeed;
 		}
 		else{
 			winner = lowSeed;
 		}
-		System.out.println("winner = "+ winner);
-		System.out.println("***************");
+
 		return winner;
 	}
 }
