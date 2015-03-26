@@ -3,7 +3,7 @@ public class SelfOrganizingList
 {
 	public static final int NCAA_TOURNAMENT = 1;
 
-	public static String midwest[] = {"", "Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", 
+	public static String midwest[] = {"MIDWEST", "Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", 
 		"Cincinnati", "Purdue", "Indiana", "Texas", "Buffalo", "Valparaiso", "Northeastern", "New Mexico State", "Hampton"};
 
 	public static void main(String[] args){
@@ -55,12 +55,23 @@ public class SelfOrganizingList
 
 		if(generateNCAAData){
 			tournament = new NCAA();
-			String participants[] = null;
+			int participants[] = null;
 			int roundQueries[] = null;
-			String filename = "Round 1 Midwest Results.txt";
-			for(int round = 1; round < 2; round++){
+			String filename = "midwestResults.txt";
+			for(int round = 1; round < 5; round++){
 				if(round == 1){
-					participants = midwest;
+					participants = new int[midwest.length];
+					for(int l = 0; l < midwest.length; l++){
+						participants[l] = l;
+					}
+				}
+				else{
+					//reorder the participants such that participants /= 2
+					participants = new int[(winners.length / 2) + 1];
+					for(int k = 1; k < participants.length; k++){
+						participants[k] = winners[k];
+						//System.out.println(midwest[winners[k]]);
+					}
 				}
 				//find the winners for the given round
 				winners = tournament.generateWinners(participants, round);
@@ -72,12 +83,10 @@ public class SelfOrganizingList
 				//print the names of teams and number of queries per team to a file
 				IO io = new IO(winners, roundQueries, round);
 				io.writeRoundResultsToFile(filename);
-				
-				//reorder the participants such that participants /= 2
 			}	
 			
 			//TESTING INFO//
-			for(int z = 1; z < 17; z++){
+			/*for(int z = 1; z < 17; z++){
 				if(z == 1){
 					System.out.println("--winners--");
 				}
@@ -86,7 +95,7 @@ public class SelfOrganizingList
 				}
 				System.out.println(midwest[winners[z]]);
 				System.out.println(roundQueries[z]);
-			}
+			}*/
 		}
 		
 		else if(scenario == NCAA_TOURNAMENT){

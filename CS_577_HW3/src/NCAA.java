@@ -95,22 +95,20 @@ public class NCAA {
 	}
 	
 
-	public int[] generateWinners(String[] roundParticipants, int roundNumber) {
+	public int[] generateWinners(int[] roundParticipants, int roundNumber) {
 		
 		//Store winners in first half of the array and losers in the second half of it
 		int winnersLosers[] = new int[roundParticipants.length];
 		winnersLosers[0] = -1;
-		int highSeed = 1;
-		int lowSeed = roundParticipants.length-1;
+		int j = roundParticipants.length-1;
 		int winner;
-		int loserIndex = roundParticipants.length-1;
-		
-		//this will start loserIndex correct for future rounds
-		loserIndex -= 2*(roundNumber - 1);		
+		int loserIndex = roundParticipants.length-1;	
 				
-		for(int i = 1; i < (roundParticipants.length/2 +1); i++){
-			
-			winner = playGame(highSeed, lowSeed, roundParticipants, roundNumber);
+		for(int i = 1; i < (roundParticipants.length/2)+1; i++){
+			int highSeed = roundParticipants[i];
+			int lowSeed = roundParticipants[j];
+
+			winner = playGame(highSeed, lowSeed, roundNumber);
 			if(winner == highSeed){
 				winnersLosers[i] = highSeed;
 				winnersLosers[loserIndex] = lowSeed;
@@ -123,21 +121,19 @@ public class NCAA {
 				System.out.println("Something went wrong. We should have a winner...");
 			}
 			loserIndex--;
-			highSeed++;
-			lowSeed--;
+			j--;
 		}
 		return winnersLosers;
 	}
 	
 	// Return winner
-	private int playGame(int highSeed, int lowSeed, String[] roundParticipants, int round){
+	private int playGame(int highSeed, int lowSeed, int round){
 		
 		int winner = -1;
 		int highSeedChanceToWin = 0;
 		double highSeedArrayValues = 0;
 		double lowSeedArrayValues = 0;
 		double totalProbability = 0;
-		
 		// Switch based on what Region we are trying to determine the winners for
 		switch (round/7 ){
 			case 0 : {

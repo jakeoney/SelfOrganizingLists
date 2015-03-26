@@ -118,7 +118,7 @@ public class GenerateQuery {
 			//finds the interest level (given by percentages above) for the given winner/loser
 			int range = this.whichRangeForQueries((int)roundMW[roundResults[i]]);
 			
-			if(i < (roundResults.length/2) + 1){ //then we are working with winning query numbers
+			if(i <= (roundResults.length/2)){ //then we are working with winning query numbers
 				winning = true;
 			}
 			else{ //we are working with the losing queries (stored in second half of array) because 

@@ -19,11 +19,15 @@ public class IO
 	}
 
 	public boolean writeRoundResultsToFile(String filename){
-		System.out.println("Ever in file iO?");
 		boolean writeSuccessful = false;
 		try{
 		BufferedWriter outputWriter = null;
-		outputWriter = new BufferedWriter(new FileWriter(filename));
+		if(round == 1){
+			outputWriter = new BufferedWriter(new FileWriter(filename));
+		}
+		else{
+			outputWriter = new BufferedWriter(new FileWriter(filename, true));
+		}
 		outputWriter.write(midwest[0] + " Round " + round);
 		outputWriter.newLine();
 		outputWriter.newLine();
@@ -35,6 +39,7 @@ public class IO
 			outputWriter.write(Integer.toString(queries[i]));
 			outputWriter.newLine();
 		}
+		outputWriter.newLine();
 		writeSuccessful = true;
 		outputWriter.flush();  
 		outputWriter.close();
