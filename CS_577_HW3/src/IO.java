@@ -56,8 +56,12 @@ public class IO
 					outputWriter.newLine();
 			     }
 			}
-			outputWriter.write("-1");
-			outputWriter.newLine();
+			if(division == 4 || round == 5 || round == 6){
+				if(division != 5){ //this is for the dumb final 4 case
+					outputWriter.write("-1");
+					outputWriter.newLine();
+				}
+			}
 			writeSuccessful = true;
 			outputWriter.flush();  
 			outputWriter.close();
