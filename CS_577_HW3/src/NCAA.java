@@ -100,19 +100,6 @@ public class NCAA {
 		}
 		return total;
 	}
-	
-	public void moveToFront(){
-
-	}
-
-	public void count(){
-
-	}
-
-	public void transpose(){
-
-	}
-	
 
 	public int[] generateWinners(int[] roundParticipants, int roundNumber, int division) {
 		

@@ -10,6 +10,11 @@
 public class SelfOrganizingList 
 {
 	public static final int NCAA_TOURNAMENT = 1;
+	public static final int CODE = 2;
+	public static final int ROULETTE = 3;
+	public static final int MTF = 1;
+	public static final int COUNT = 2;
+	public static final int TRANSPOSE = 3;
 
 	public static String midwest[] = {"MIDWEST", "Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", 
 		"Cincinnati", "Purdue", "Indiana", "Texas", "Buffalo", "Valparaiso", "Northeastern", "New Mexico State", "Hampton"};
@@ -26,10 +31,19 @@ public class SelfOrganizingList
 	
 	public static void main(String[] args){
 		boolean modeMTF = false, modeTranspose = false, modeCount = false;
+		boolean filenameFound = false;
 		boolean generateNCAAData = false;
 		int scenario = 0;
 		int i = 0;
-
+		String filename = null;
+		if(args.length == 0){
+			System.out.println("Usage flags are:\n"
+					+ "-m <mode>\t for which mode you want to run in, options are mtf, count, transpose\n"
+					+ "-g\t\t to generate new NCAA tournament data\n"
+					+ "-s <scenario>\t for the scenario you want to observe, options are ncaa, ..."
+					+ "-f <filename>\t for the name of the file that contains the queries");
+			System.exit(1);
+		}
 		//parse cmd line args
 		while(i < args.length){
 			if(args[i].equals("-m")){
@@ -47,7 +61,13 @@ public class SelfOrganizingList
 			else if(args[i].equals("-s")){
 				i++;
 				if(args[i].equalsIgnoreCase("ncaa")){
-					scenario = NCAA_TOURNAMENT; //corresponds to ncaa
+					scenario = NCAA_TOURNAMENT;
+				}
+				else if(args[i].equalsIgnoreCase("code")){
+					scenario = CODE;
+				}
+				else if(args[i].equalsIgnoreCase("roulette")){
+					scenario = ROULETTE;
 				}
 			}
 			else if(args[i].equals("-g"))
@@ -55,11 +75,17 @@ public class SelfOrganizingList
 				generateNCAAData = true;
 				//then we will want to generate results for NCAA_tournament
 			}
+			else if(args[i].equals("-f")){
+				i++;
+				filename = args[i];
+				filenameFound = true;
+			}
 			else{
 				System.out.println("Usage flags are:\n"
 						+ "-m <mode>\t for which mode you want to run in, options are mtf, count, transpose\n"
 						+ "-g\t\t to generate new NCAA tournament data\n"
-						+ "-s <scenario>\t for the scenario you want to observe, options are ncaa, ...");
+						+ "-s <scenario>\t for the scenario you want to observe, options are ncaa, ..."
+						+ "-f <filename>\t for the name of the file that contains the queries");
 				System.exit(1);
 			}
 			i++;
@@ -73,8 +99,31 @@ public class SelfOrganizingList
 			generateNCAATournamentInfo();
 		}
 		
-		else if(scenario == NCAA_TOURNAMENT){
+		
+		if(scenario == NCAA_TOURNAMENT && filenameFound){
 
+			if(modeMTF){
+				Analysis analyze = new Analysis(filename, MTF);
+			}
+			else if(modeCount){
+				Analysis analyze = new Analysis(filename, COUNT);
+			}
+			else if(modeTranspose){
+				Analysis analyze = new Analysis(filename, TRANSPOSE);
+			}
+		}
+		else if(scenario == CODE){
+			if(modeMTF){
+
+			}
+			else if(modeCount){
+
+			}
+			else if(modeTranspose){
+
+			}
+		}
+		else if(scenario == ROULETTE){
 			if(modeMTF){
 
 			}
