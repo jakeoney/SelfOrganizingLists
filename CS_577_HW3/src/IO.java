@@ -1,6 +1,8 @@
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Random;
 
 
 public class IO 
@@ -21,25 +23,65 @@ public class IO
 	private int queries[];
 	private int round;
 	private int division;
+	NCAA teams;
 
-	public IO(int[] participants, int[] queries, int round, int division){
+	public IO(int[] participants, int[] queries, int round, int division, NCAA teams){
 		this.participants = participants;
 		this.queries = queries;
 		this.round = round;
 		this.division = division;
+		this.teams = teams;
 	}
 
+	public boolean writeQueriesToFile(String filename){
+		boolean writeSuccessful = false;
+		//Generate Random number
+		Random rand = new Random();
+		int randomNum;
+			    //numbers between 1 and 100
+		try{
+			BufferedWriter outputWriter = null;
+			if(round == 1 && division == 1){
+				this.printDefs(filename);
+			}
+
+			outputWriter = new BufferedWriter(new FileWriter(filename, true));
+			while(teams.getTotalQueries() != 0){
+				//generate a random number to try to query that team
+			     randomNum = rand.nextInt(teams.getTeams().size());
+			     //if that team has queries available
+			     if(teams.getTeams().get(randomNum).getQueries() > 0){
+			    	outputWriter.write(Integer.toString(teams.getTeams().get(randomNum).getIndex()));
+			    	teams.getTeams().get(randomNum).decrementQueries();
+					outputWriter.newLine();
+			     }
+			}
+			outputWriter.write("-1");
+			outputWriter.newLine();
+			writeSuccessful = true;
+			outputWriter.flush();  
+			outputWriter.close();
+		} catch (IOException e){
+			System.out.println("Error Writing to File");
+			System.exit(2);
+		} catch (NumberFormatException e){
+			System.out.println("Query number wasn't a number?");
+			System.exit(2);
+		}
+		return writeSuccessful;
+	}
+	
 	public boolean writeRoundResultsToFile(String filename){
 		boolean writeSuccessful = false;
 		boolean firstItr = true;
 		try{
 		BufferedWriter outputWriter = null;
 		if(round == 1 && division == 1){
-			outputWriter = new BufferedWriter(new FileWriter(filename));
+			this.printDefs(filename);
 		}
-		else{
-			outputWriter = new BufferedWriter(new FileWriter(filename, true));
-		}
+
+		outputWriter = new BufferedWriter(new FileWriter(filename, true));
+
 		switch(division){
 			case 1: {
 				outputWriter.write(midwest[0] + " Round " + round);
@@ -186,5 +228,33 @@ public class IO
 		}
 		
 		return writeSuccessful;
+	}
+
+	private void printDefs(String filename) {
+		try{
+			ArrayList<Team> ourTeams = this.teams.getTeams();
+			BufferedWriter outputWriter = new BufferedWriter(new FileWriter(filename));
+			outputWriter.write("#defs");
+			outputWriter.newLine();
+			for(int i = 0; i < ourTeams.size(); i++)
+			{
+				outputWriter.write(Integer.toString(i));
+				outputWriter.newLine();
+				outputWriter.write(ourTeams.get(i).getName());
+				outputWriter.newLine();
+			}
+			outputWriter.write("#queries");
+			outputWriter.newLine();
+
+			outputWriter.flush();  
+			outputWriter.close();
+		}
+		catch(NumberFormatException e){
+			System.out.println("Invalid format");
+			System.exit(5);
+		} catch(IOException e){
+			System.out.println("");
+			System.exit(5);
+		}
 	}
 }

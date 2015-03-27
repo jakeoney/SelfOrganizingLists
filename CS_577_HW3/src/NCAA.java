@@ -1,8 +1,20 @@
+import java.util.ArrayList;
 import java.util.Random;
 
 
 public class NCAA {
+	private final String midwest[] = {"MIDWEST", "Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", 
+			"Cincinnati", "Purdue", "Indiana", "Texas", "Buffalo", "Valparaiso", "Northeastern", "New Mexico State", "Hampton"};
 
+	public final String west[] = { "WEST", "Wisconsin", "Arizona", "Baylor", "North Carolina", "Arkansas", "Xavier", "VCU", "Oregon", "Oklahoma State",
+		"Ohio State", "Mississippi", "Wofford", "Harvard", "Georgia State", "Texas Southern", "Costal Carolina"};
+	
+	public final String east[] = {"EAST", "Villanova", "Virginia", "Oklahoma", "Louisville", "Northern Iowa", "Providence", "Michigan State", "NC State",
+		"LSU", "Georgia", "Dayton", "Wyoming", "UC Irvine", "Albany", "Belmont", "Lafayette"};
+	
+	public final String south[] = {"SOUTH", "Duke", "Gonzaga", "Iowa State", "Georgetown", "Utah", "Southern Methodist", "Iowa", "San Diego State", 
+		"St Johns State", "Davidson", "UCLA", "Stephen F Austin", "Eastern Washington", "UAB", "North Dakota State", "Robert Morris"};
+	
 	double roundMW[] = 
 		{
 			//round 1
@@ -49,8 +61,44 @@ public class NCAA {
 			-1, 9.3, 2.9, 1.6, 0.3, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.1, 0.1
 		};
 
+	private ArrayList<Team> teams;
 	public NCAA(){
+		teams = new ArrayList<Team>();
+		Team toAdd;
+		int index = 0;
 		
+		for(int i = 1; i < 17; i++ ){
+			toAdd = new Team(midwest[i], index, roundMW[i], roundMW[i + 17], roundMW[i+34], roundMW[i+51], roundMW[i+69], roundMW[i+85]);
+			index++;
+			teams.add(toAdd);
+		}
+		for(int i = 1; i < 17; i++ ){
+			toAdd = new Team(west[i], index, roundW[i], roundW[i + 17], roundW[i+34], roundW[i+51], roundMW[i+69], roundW[i+85]);
+			index++;
+			teams.add(toAdd);
+		}
+		for(int i = 1; i < 17; i++ ){
+			toAdd = new Team(east[i], index, roundE[i], roundE[i + 17], roundE[i+34], roundE[i+51], roundE[i+69], roundE[i+85]);
+			index++;
+			teams.add(toAdd);
+		}
+		for(int i = 1; i < 17; i++ ){
+			toAdd = new Team(south[i], index, roundS[i], roundS[i + 17], roundS[i+34], roundS[i+51], roundS[i+69], roundS[i+85]);
+			index++;
+			teams.add(toAdd);
+		}
+	}
+	
+	public ArrayList<Team> getTeams(){
+		return this.teams;
+	}
+	
+	public int getTotalQueries(){
+		int total = 0;
+		for(int i = 0; i < teams.size(); i++){
+			total += teams.get(i).getQueries();
+		}
+		return total;
 	}
 	
 	public void moveToFront(){

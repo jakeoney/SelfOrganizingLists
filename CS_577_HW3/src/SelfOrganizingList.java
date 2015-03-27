@@ -131,12 +131,13 @@ public class SelfOrganizingList
 					
 				}
 				//figure out the queries for each team that round
-				queries = new GenerateQuery(winners, round, division);
+				queries = new GenerateQuery(winners, round, division, tournament);
 				roundQueries = queries.getQueries();
 
 				//print the names of teams and number of queries per team to a file
-				io = new IO(winners, roundQueries, round, division);
-				io.writeRoundResultsToFile(filename);
+				io = new IO(winners, roundQueries, round, division, tournament);
+				//io.writeRoundResultsToFile(filename);
+				io.writeQueriesToFile(filename);
 			}	
 		}
 		//in here we need to do the same thing but with the final 4
@@ -144,29 +145,35 @@ public class SelfOrganizingList
 		
 		//handle the left side (ie the Midwest and West)
 		winners = tournament.generateWinners(finalFourLeft, 5, 5);
-		queries = new GenerateQuery(winners, 5, 5);
+		queries = new GenerateQuery(winners, 5, 5, tournament);
 		roundQueries = queries.getQueries();
-		io = new IO(winners, roundQueries, 5, 5);
-		io.writeRoundResultsToFile(filename);
+		io = new IO(winners, roundQueries, 5, 5, tournament);
+		//io.writeRoundResultsToFile(filename);
+		io.writeQueriesToFile(filename);
+
 		championship[0] = winners[0];
 		championship[1] = winners[1]; 
 		
 		//handle the right side (ie the East and South)
 		winners = tournament.generateWinners(finalFourRight, 5, 6);
-		queries = new GenerateQuery(winners, 5, 6);
+		queries = new GenerateQuery(winners, 5, 6, tournament);
 		roundQueries = queries.getQueries();
-		io = new IO(winners, roundQueries, 5, 6);
-		io.writeRoundResultsToFile(filename);
+		io = new IO(winners, roundQueries, 5, 6, tournament);
+		//io.writeRoundResultsToFile(filename);
+		io.writeQueriesToFile(filename);
+
 		championship[0] += winners[0];
 
 		championship[2] = winners[2];
 		
 		//in here we need to do the same thing but with the final 2
 		winners = tournament.generateWinners(championship, 6, 7);
-		queries = new GenerateQuery(winners, 6, 7);
+		queries = new GenerateQuery(winners, 6, 7, tournament);
 		roundQueries = queries.getQueries();
-		io = new IO(winners, roundQueries, 6, 7);
-		io.writeRoundResultsToFile(filename);
+		io = new IO(winners, roundQueries, 6, 7, tournament);
+		//io.writeRoundResultsToFile(filename);
+		io.writeQueriesToFile(filename);
+
 	}
 }
 
