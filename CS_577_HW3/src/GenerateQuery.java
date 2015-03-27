@@ -58,8 +58,8 @@ public class GenerateQuery {
 			-1, 9.3, 2.9, 1.6, 0.3, 0.2, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.05, 0.1, 0.1
 		};
 	
-	int winnerQueries[] = {100, 90, 80, 70, 60, 50, 40, 30, 20, 10};
-	int loserQueries[] = {1, 5, 10, 15, 20, 25, 30, 35, 40, 45};
+	int winnerQueries[] = {1000, 900, 800, 700, 600, 500, 400, 300, 200, 100};
+	int loserQueries[] = {10, 50, 100, 150, 200, 250, 300, 350, 400, 450};
 	
 	// Round Results stores the index for each team
 	private int[] roundResults;

@@ -15,6 +15,7 @@ public class SelfOrganizingList
 	public static final int MTF = 1;
 	public static final int COUNT = 2;
 	public static final int TRANSPOSE = 3;
+	public static final int NORMAL = 4;
 
 	public static String midwest[] = {"MIDWEST", "Kentucky", "Kansas", "Notre Dame", "Maryland", "West Virginia", "Butler", "Wichita", 
 		"Cincinnati", "Purdue", "Indiana", "Texas", "Buffalo", "Valparaiso", "Northeastern", "New Mexico State", "Hampton"};
@@ -33,6 +34,7 @@ public class SelfOrganizingList
 		boolean modeMTF = false, modeTranspose = false, modeCount = false;
 		boolean filenameFound = false;
 		boolean generateNCAAData = false;
+		boolean modeNormal = false;
 		int scenario = 0;
 		int i = 0;
 		String filename = null;
@@ -56,6 +58,9 @@ public class SelfOrganizingList
 				}
 				else if(args[i].equalsIgnoreCase("transpose")){
 					modeTranspose = true;
+				}
+				else if(args[i].equalsIgnoreCase("normal")){
+					modeNormal = true;
 				}
 			}
 			else if(args[i].equals("-s")){
@@ -111,30 +116,38 @@ public class SelfOrganizingList
 			else if(modeTranspose){
 				Analysis analyze = new Analysis(filename, TRANSPOSE);
 			}
+			else if(modeNormal){
+				Analysis analyze = new Analysis(filename, NORMAL);
+			}
 		}
 		else if(scenario == CODE){
 			if(modeMTF){
-
+				Analysis analyze = new Analysis(filename, MTF);
 			}
 			else if(modeCount){
-
+				Analysis analyze = new Analysis(filename, COUNT);
 			}
 			else if(modeTranspose){
-
+				Analysis analyze = new Analysis(filename, TRANSPOSE);
+			}
+			else if(modeNormal){
+				Analysis analyze = new Analysis(filename, NORMAL);
 			}
 		}
 		else if(scenario == ROULETTE){
 			if(modeMTF){
-
+				Analysis analyze = new Analysis(filename, MTF);
 			}
 			else if(modeCount){
-
+				Analysis analyze = new Analysis(filename, COUNT);
 			}
 			else if(modeTranspose){
-
+				Analysis analyze = new Analysis(filename, TRANSPOSE);
+			}
+			else if(modeNormal){
+				Analysis analyze = new Analysis(filename, NORMAL);
 			}
 		}
-
 	}
 	
 	public static void generateNCAATournamentInfo(){

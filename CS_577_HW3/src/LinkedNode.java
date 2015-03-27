@@ -23,7 +23,9 @@ public class LinkedNode
 		return this.count;
 	}
 	
-	public void incrementCount(){
+	//this returns its value so that we can compare it to the other values
+	public int incrementCount(){
 		this.count = this.count + 1;
+		return this.count;
 	}
 }
